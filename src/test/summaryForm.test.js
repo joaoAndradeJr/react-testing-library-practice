@@ -11,6 +11,7 @@ describe('tests of the summary form component', () => {
     expect(checkbok).toBeInTheDocument();
     expect(checkbok).not.toBeChecked();
   });
+
   test('confirm order button must be "disabled" if checkbox is not checked', () => {
     render(<SummaryForm />);
 
@@ -19,6 +20,14 @@ describe('tests of the summary form component', () => {
 
     const checkbok = screen.getByRole('checkbox', { name: /i agree to terms and conditions/i });
     expect(checkbok).not.toBeChecked();
+  });
+
+  test('confirm order button must be "enabled" if checkbox is checked', () => {
+    render(<SummaryForm />);
+
+    const confirmOrderBtn = screen.getByRole('button', { name: /confirm order/i });
+
+    const checkbok = screen.getByRole('checkbox', { name: /i agree to terms and conditions/i });
 
     fireEvent.click(checkbok);
     expect(checkbok).toBeChecked();
